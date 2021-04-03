@@ -81,6 +81,28 @@ public class AgoraEvent extends BaseLongIdEntity implements HasUuid {
     @Column(name = "EVENT_WEB_SITE", nullable = false)
     private String eventWebSite;
 
+    @Column(name = "EVENT_LAYOUT")
+    private Long eventLayout;
+
+    @Column(name = "EVENT_BARCODE")
+    private Long eventBarcode;
+
+    public Long getEventBarcode() {
+        return eventBarcode;
+    }
+
+    public void setEventBarcode(Long eventBarcode) {
+        this.eventBarcode = eventBarcode;
+    }
+
+    public Long getEventLayout() {
+        return eventLayout;
+    }
+
+    public void setEventLayout(Long eventLayout) {
+        this.eventLayout = eventLayout;
+    }
+
     public String getEventWebSite() {
         return eventWebSite;
     }
