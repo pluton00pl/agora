@@ -12,6 +12,7 @@ import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Table(name = "AGORA_AGORA_EVENT")
@@ -86,6 +87,20 @@ public class AgoraEvent extends BaseLongIdEntity implements HasUuid {
 
     @Column(name = "EVENT_BARCODE")
     private Long eventBarcode;
+
+    @JoinTable(name = "AGORA_AGORA_EVENT_PRODUCT_AGORA_EVENT_LINK",
+            joinColumns = @JoinColumn(name = "AGORA_EVENT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "AGORA_EVENT_PRODUCT_ID"))
+    @ManyToMany
+    private List<AgoraEventProduct> agoraEventProducts;
+
+    public List<AgoraEventProduct> getAgoraEventProducts() {
+        return agoraEventProducts;
+    }
+
+    public void setAgoraEventProducts(List<AgoraEventProduct> agoraEventProducts) {
+        this.agoraEventProducts = agoraEventProducts;
+    }
 
     public Long getEventBarcode() {
         return eventBarcode;

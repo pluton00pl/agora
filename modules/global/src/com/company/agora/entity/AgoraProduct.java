@@ -10,6 +10,7 @@ import com.haulmont.cuba.security.entity.User;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Table(name = "AGORA_AGORA_PRODUCT")
@@ -22,8 +23,8 @@ public class AgoraProduct extends BaseLongIdEntity implements HasUuid {
 
     @Lookup(type = LookupType.DROPDOWN, actions = {})
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PRODUCT_MERCHANT_ID_ID")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User productMerchantID;
 
     @NotNull
@@ -47,6 +48,32 @@ public class AgoraProduct extends BaseLongIdEntity implements HasUuid {
 
     @Column(name = "PRODUCT_BARCODE")
     private Long productBarcode;
+
+    @Lookup(type = LookupType.DROPDOWN, actions = {})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "AGORA_EVENT_PRODUCT_ID")
+    private AgoraEventProduct agoraEventProduct;
+    @JoinTable(name = "AGORA_AGORA_EVENT_PRODUCT_AGORA_PRODUCT_LINK",
+            joinColumns = @JoinColumn(name = "AGORA_PRODUCT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "AGORA_EVENT_PRODUCT_ID"))
+    @ManyToMany
+    private List<AgoraEventProduct> agoraEventProducts;
+
+    public List<AgoraEventProduct> getAgoraEventProducts() {
+        return agoraEventProducts;
+    }
+
+    public void setAgoraEventProducts(List<AgoraEventProduct> agoraEventProducts) {
+        this.agoraEventProducts = agoraEventProducts;
+    }
+
+    public AgoraEventProduct getAgoraEventProduct() {
+        return agoraEventProduct;
+    }
+
+    public void setAgoraEventProduct(AgoraEventProduct agoraEventProduct) {
+        this.agoraEventProduct = agoraEventProduct;
+    }
 
     public Long getProductBarcode() {
         return productBarcode;

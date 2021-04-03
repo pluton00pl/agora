@@ -37,14 +37,14 @@ public class AgoraKiosk extends BaseLongIdEntity implements HasUuid {
 
     @Lookup(type = LookupType.DROPDOWN, actions = {})
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "KIOSK_ORGANISER_ID_ID")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User kioskOrganiserId;
 
     @Lookup(type = LookupType.DROPDOWN, actions = {})
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "KIOSK_MERCHANT_ID_ID")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User kioskMerchantID;
 
     public BigDecimal getKioskCost() {
