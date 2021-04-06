@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://agoraEventBrowse.caption"
+        focusComponent="agoraEventsTable"
+        messagesPack="com.company.agora.web.screens.agoraevent">
+    <data readOnly="true">
+        <collection id="agoraEventsDc"
+                    class="com.company.agora.entity.AgoraEvent">
+            <view extends="_local"/>
+            <loader id="agoraEventsDl">
+                <query>
+                    <![CDATA[select e from agora_AgoraEvent e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="agoraEventsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="agoraEventsTable"
+                dataLoader="agoraEventsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="agoraEventsTable"
+                    width="100%"
+                    dataContainer="agoraEventsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="eventName"/>
+                <column id="eventDescription"/>
+                <column id="eventStartDate"/>
+                <column id="eventEndDate"/>
+                <column id="eventLocation"/>
+                <column id="eventContactName"/>
+                <column id="eventContactPhone"/>
+                <column id="eventPublished"/>
+                <column id="eventKioskCost"/>
+                <column id="eventKioskCount"/>
+                <column id="eventDailySiteClose"/>
+                <column id="eventTimeZone"/>
+                <column id="eventWebSite"/>
+                <column id="eventLayout"/>
+                <column id="eventBarcode"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="agoraEventsTable.create"/>
+                <button id="editBtn" action="agoraEventsTable.edit"/>
+                <button id="removeBtn" action="agoraEventsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
